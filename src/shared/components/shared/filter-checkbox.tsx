@@ -17,8 +17,9 @@ export type FilterCheckboxProps = {
 
 
 export const FilterCheckbox: React.FC<FilterCheckboxProps> = ({label, value, checked, name, onCheckedChange }) => {
+
   return (  
-    <label className={cn('flex items-center gap-2 cursor-pointer')}>
+    <label  id={`checkbox-${name}-${value}`} className={cn('flex items-center gap-2 cursor-pointer')}>
       <Checkbox value={value} checked={checked} onCheckedChange={onCheckedChange} id={`checkbox-${name}-${value}`} />
         {label}
     </label>

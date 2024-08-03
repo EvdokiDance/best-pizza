@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { FilterCheckbox, FilterCheckboxProps } from './filter-checkbox';
 
 import { Title } from '.';
-import { Input } from '..';
+import { Input, Skeleton } from '..';
 
 
 
@@ -22,12 +22,32 @@ interface Props {
     loading?: boolean,
     placeholder? : string,
     onClickCheckbox?: (id: string) => void;
+    selectedIds?: Set<string>;
 }
 
-export const CheckboxFiltersGroup: React.FC<Props> = ({ className, items, title, limit = 5, name, onClickCheckbox, defaultItems, placeholder = 'Поиск...' }) => {
-      const [showAll, setShowAll] = React.useState(false);
-  const [searchValue, setSearchValue] = React.useState('');
+export const CheckboxFiltersGroup: React.FC<Props> = ({ 
+  className,
+  items, 
+  title, 
+  loading, 
+  limit = 5, 
+  name, 
+  onClickCheckbox, 
+  selectedIds, 
+  defaultItems, 
+  placeholder = 'Поиск...' 
+  }) => {
+    
+    const [showAll, setShowAll] = React.useState(false);
+    const [searchValue, setSearchValue] = React.useState('');
 
+    if (loading) {
+      return <div className='flex flex-col gap-4 items-start'>
+        { title && <Title size='xs' text={title}/>}
+        { Array(limit).fill(0).map((_, idx) => (<Skeleton key={idx} className='w-full h-6'/>)) }
+        <Skeleton className='w-1/2 h-6'/>
+      </div>;
+    }
 
 
   const list = showAll 
@@ -40,17 +60,19 @@ export const CheckboxFiltersGroup: React.FC<Props> = ({ className, items, title,
   }
 
 
+
+
   return (
     <div className={cn('flex flex-col gap-4 items-start',className)}>
-        { title && <Title size='xs' className='' text={title}/>}
+        { title && <Title size='xs' text={title}/>}
 
         {showAll && <div className='mb-5'><Input type="text" onChange={handleSearchValue} placeholder={placeholder} /></div>}
 
         <div className='flex flex-col gap-4'>
-            {list.map((item, idx) => <FilterCheckbox key={idx} {...item}/>)}
+            {list.map((item, idx) => <FilterCheckbox key={idx} name={name} checked={selectedIds?.has(item.value)} onCheckedChange={() => onClickCheckbox?.(item.value)} {...item}/>)}
         </div>
 
-        {items.length > limit && <button onClick={() => setShowAll(!showAll)} className='text-primary'>{showAll ? 'Скрыть' : '+ Показать всё'}</button>}
+        {items.length > limit && !searchValue && <button onClick={() => setShowAll(!showAll)} className='text-primary'>{showAll ? 'Скрыть' : '+ Показать всё'}</button>}
 
     </div>
     );  

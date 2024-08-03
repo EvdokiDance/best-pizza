@@ -9,6 +9,9 @@ interface Props {
 }
 
  const Page: React.FC<Props> = () => {
+
+
+
   return (
     <>
       <Container className='mt-5'>
@@ -18,7 +21,7 @@ interface Props {
       <Container className='mt-9 flex gap-[48px]'>
         <Sidebar/>
         <div className='w-full'>
-          <ProductsGroupList title='Пицца' categoryId={1} items={
+          <ProductsGroupList title='Пиццы' categoryId={1} items={
             [
             {id: 1, name: 'Сырный цепленок', imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D6175C10773BFE36E56D48DF7E3.avif', ingredients: ['Цыпленок', 'моцарелла', 'сыры чеддер и пармезан', 'сырный соус', 'томаты', 'альфредо', 'чеснок'], items: [{price: 550}]},
             {id: 2, name: 'Сырный цепленок', imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D6175C10773BFE36E56D48DF7E3.avif', ingredients: ['Цыпленок', 'моцарелла', 'сыры чеддер и пармезан', 'сырный соус', 'томаты', 'альфредо', 'чеснок'], items: [{price: 550}]},
@@ -30,7 +33,7 @@ interface Props {
             ]
           }
           />
-          <ProductsGroupList title='Что-то еще' categoryId={2} items={
+          <ProductsGroupList title='Завтрак' categoryId={2} items={
             [
             {id: 1, name: 'Сырный цепленок', imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D6175C10773BFE36E56D48DF7E3.avif', ingredients: ['Цыпленок', 'моцарелла', 'сыры чеддер и пармезан', 'сырный соус', 'томаты', 'альфредо', 'чеснок'], items: [{price: 550}]},
             {id: 2, name: 'Сырный цепленок', imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D6175C10773BFE36E56D48DF7E3.avif', ingredients: ['Цыпленок', 'моцарелла', 'сыры чеддер и пармезан', 'сырный соус', 'томаты', 'альфредо', 'чеснок'], items: [{price: 550}]},
