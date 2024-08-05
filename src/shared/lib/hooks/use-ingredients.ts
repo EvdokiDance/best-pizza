@@ -1,15 +1,10 @@
 import { Api } from "@/shared/services/api-client"
 import { Ingredient } from "@prisma/client"
 import React, { useEffect } from "react"
-import { useSet } from "react-use"
 
-export const useFilterIngredients = () => {
+export const useIngredients = () => {
     const [ingredients, setIngredients] = React.useState<Ingredient[]>([])
     const [loading, setLoading] = React.useState(true);
-
-    const [ingredientsIds, { toggle }] = useSet(new Set<string>([]));
-
-
 
     useEffect(() => {
         Api.ingredients
@@ -21,9 +16,7 @@ export const useFilterIngredients = () => {
 
 
     return {
-        ingredients: ingredients,
-        ingredientsIds: ingredientsIds,
-        onAddIngredientId : (id: string) => toggle(id),
+        ingredients: ingredients,   
         loading: loading,
     }
 }

@@ -1,10 +1,10 @@
-import { categories } from './../../../prisma/constants';
+import { categories } from '../../../prisma/constants';
 import React from 'react';
 import { Category } from '@prisma/client';
-import { Categories } from './../../components/shared/categories';
+import { Categories } from '../../components/shared/categories';
 import { Api } from "@/shared/services/api-client"
 
-export const useFilterCategories = () => {
+export const useCategories = () => {
     const [categories, setCategories] = React.useState<Category[]>([])
 
     React.useEffect(() => {

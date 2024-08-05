@@ -5,27 +5,23 @@ import { RangeSlider, Title } from '.';
 import { Input } from '..';
 import { cn } from '@/shared/lib/utils';
 
-interface Props {
-    className?: string;
-    prices: {priceFrom? : number, priceTo?: number};
-    setPrices: Dispatch<SetStateAction<{priceFrom? : number, priceTo?: number}>>;
-}
-
 
 interface PriceProps {
   priceFrom? : number,
   priceTo?: number,
 }
 
-export const PriceFilter: React.FC<Props> = ({ className, prices, setPrices }) => {
+
+interface Props {
+    className?: string;
+    prices: PriceProps,
+    updatePrices: (name: keyof PriceProps, value: number) => void,
+    setPrices: Dispatch<SetStateAction<PriceProps>>,
+}
 
 
-  
 
-
-  const updatePrices = (name: keyof PriceProps, value: number) => {
-    setPrices((prev) => ({ ...prev, [name]: value }));
-  }
+export const PriceFilter: React.FC<Props> = ({ className, prices, updatePrices, setPrices }) => {
 
 
 
@@ -39,14 +35,15 @@ export const PriceFilter: React.FC<Props> = ({ className, prices, setPrices }) =
                   value={prices.priceFrom} 
                   min={0} 
                   max={1000} 
-                  defaultValue={0}
+                  placeholder='0'
                   />
                 <Input 
                   type='number' 
                   onChange={(e) => updatePrices('priceTo', Number(e.target.value))} 
                   value={prices.priceTo} 
                   min={0} 
-                  max={1000} 
+                  max={1000}
+                  placeholder='1000'
                 />
             </div>
             <RangeSlider step={10} min={0} max={1000} onValueChange={([priceFrom, priceTo]) => setPrices({priceFrom, priceTo})} value={[prices.priceFrom || 0, prices.priceTo || 1000]}/>

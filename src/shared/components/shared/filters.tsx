@@ -1,15 +1,10 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { PriceFilter } from './price-filter';
 import { CheckboxFiltersGroup, Title } from '.';
 import { Button } from '..';
-import { useFilterIngredients } from '@/shared/lib/hooks';
-import { Ingredient } from '@prisma/client';
+import { useFilters, useIngredients, useQueryFilters } from '@/shared/lib/hooks';
 
-import {useSet} from 'react-use';
-
-import qs from 'qs'
-import { useRouter } from 'next/navigation';
 
 interface Props {
     className?: string;
@@ -22,51 +17,27 @@ interface PriceProps {
 }
 
 
+
 export const Filters: React.FC<Props> = ({ className }) => {
 
 
-  const router = useRouter();
+  let { ingredients, loading } = useIngredients();
 
-
-  let { ingredients, onAddIngredientId, ingredientsIds, loading } = useFilterIngredients();
-
-
-  const [prices, setPrices] = useState({} as PriceProps);
   
-  let [sizesIds , {toggle : onAddSizeId}] = useSet(new Set<string>([]));
-  let [pizzaTypesIds , {toggle : onAddPizzaTypeId}] = useSet(new Set<string>([]));
+  const filter = useFilters()
+  
+  useQueryFilters(filter);
 
-  let items = ingredients.map((igredient) => ({ value: String(igredient.id), label: igredient.name}));
+   let items = ingredients.map((igredient) => ({ value: String(igredient.id), label: igredient.name}));
 
-  useEffect(() => {
-
-    let filters = {
-      ...prices,
-      pizzaTypes: Array.from(pizzaTypesIds),
-      sizes: Array.from(sizesIds),
-      ingredients: Array.from(ingredientsIds)
-    }
-
-
-    console.log(filters)
-
-   let query = qs.stringify(filters, {arrayFormat: 'comma'})
-
-   console.log(query);
-
-    router.push(`?${query}`)
-   
-
-
-  }, [prices, pizzaTypesIds, sizesIds, ingredientsIds])
 
   return (
     <div className='flex flex-col gap-6'>
         <Title size='md' text='Фильтрация'/>
-        <CheckboxFiltersGroup title='Тип теста' name='testo' selectedIds={pizzaTypesIds} onClickCheckbox={onAddPizzaTypeId} items={[{label: 'Традиционное', value: '1'}, {label: 'Тонкое', value: '2'}]}/>
-        <CheckboxFiltersGroup name='sizes' selectedIds={sizesIds} onClickCheckbox={onAddSizeId} title='Размеры' limit={6} items={[{label: '35 см', value: '1'}, {label: '30 см', value: '2'}, {label: '25 см', value: '3'}]}/>
-        <PriceFilter setPrices={setPrices} prices={prices} />
-        <CheckboxFiltersGroup name='ingredients' loading={loading} selectedIds={ingredientsIds} onClickCheckbox={onAddIngredientId} title='Ингредиенты' limit={6} items={items}/>
+        <CheckboxFiltersGroup title='Тип теста' name='testo' selectedIds={filter.pizzaTypes} onClickCheckbox={filter.onAddPizzaTypeId} items={[{label: 'Традиционное', value: '1'}, {label: 'Тонкое', value: '2'}]}/>
+        <CheckboxFiltersGroup title='Размеры' name='sizes' selectedIds={filter.sizes} onClickCheckbox={filter.onAddSizeId} items={[{label: '35 см', value: '1'}, {label: '30 см', value: '2'}, {label: '25 см', value: '3'}]}/>
+        <PriceFilter updatePrices={filter.updatePrices} setPrices={filter.setPrices} prices={filter.prices} />
+        <CheckboxFiltersGroup title='Ингредиенты' name='ingredients' loading={loading} selectedIds={filter.selectedIngredients} onClickCheckbox={filter.onAddIngredientId} items={items} limit={6}/>
         <Button className='h-[50px]'>Применить</Button>
     </div>
   );

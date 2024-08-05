@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { Container } from '.';
 import { Categories } from './categories';
 import { SortPopup } from './sort-popup';
-import { useFilterCategories } from '@/shared/lib/hooks/useFilterCategories';
+import { useCategories } from '@/shared/lib/hooks/use-categories';
 
 interface Props {
     className?: string;
@@ -13,7 +13,7 @@ interface Props {
 
 export const TopBar: React.FC<Props> = ({ className }) => {
 
-   const { categories } = useFilterCategories()
+   const { categories } = useCategories()
 
   return (
     <div className={cn('mt-9 top-0 sticky z-10', className)}>
