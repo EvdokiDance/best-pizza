@@ -20,7 +20,6 @@ export interface QueryFilters extends PriceProps {
 }
 
 interface ReturnProps extends Filters {
-  updatePrices: (name: keyof PriceProps, value: number) => void,
   setPrices: Dispatch<SetStateAction<PriceProps>>,
   onAddIngredientId: (id: string) => void,
   onAddSizeId: (id: string) => void,
@@ -38,14 +37,23 @@ export const useFilters = () : ReturnProps => {
       } as PriceProps);
 
       
-    const updatePrices = (name: keyof PriceProps, value: number) => {
-      setPrices((prev) => ({ ...prev, [name]: value }));
-    }
+    let [selectedIngredients, { toggle : onAddIngredientId }] = useSet(
+      new Set<string>(
+        searchParams.get('ingredients')?.split(',') || undefined
+        )
+      );  
 
-
-    let [selectedIngredients, { toggle : onAddIngredientId }] = useSet(new Set<string>(searchParams.get('ingredients')?.split(',') || undefined));    
-    let [sizes , {toggle : onAddSizeId}] = useSet(new Set<string>(searchParams.get('sizes')?.split(',') || undefined));
-    let [pizzaTypes, {toggle : onAddPizzaTypeId}] = useSet(new Set<string>(searchParams.get('pizzaTypes')?.split(',') || undefined));
+    let [sizes , {toggle : onAddSizeId}] = useSet(
+      new Set<string>(
+        searchParams.get('sizes')?.split(',') || undefined
+        )
+      );
+   
+    let [pizzaTypes, {toggle : onAddPizzaTypeId}] = useSet(
+      new Set<string>(
+        searchParams.get('pizzaTypes')?.split(',') || undefined
+        )
+      );
 
     return {
         selectedIngredients,
@@ -55,7 +63,6 @@ export const useFilters = () : ReturnProps => {
         onAddIngredientId,
         onAddSizeId,
         onAddPizzaTypeId,
-        updatePrices,
         setPrices,
     }
 

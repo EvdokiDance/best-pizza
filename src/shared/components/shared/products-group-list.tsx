@@ -5,12 +5,14 @@ import { ProductCard, Title } from '.';
 import { cn } from '@/lib/utils';
 import { useIntersection } from 'react-use';
 import { useCategoryStore } from '@/store';
+import { Ingredient, Product } from '@prisma/client';
+import { iProduct } from '@/types';
 
 interface Props {
     className?: string;
     title: string,
     categoryId: number,
-    items: any[],
+    items: iProduct[],
 }
 
 export const ProductsGroupList: React.FC<Props> = ({ className, title, categoryId, items }) => {
@@ -21,8 +23,10 @@ export const ProductsGroupList: React.FC<Props> = ({ className, title, categoryI
 
     const intersectionRef = React.useRef(null); 
     const intersection = useIntersection(intersectionRef, {
-        threshold: 0.5,
-    })
+        threshold: 0.4,
+    })  
+
+    console.log(items)
 
 
     useEffect(() => {
@@ -32,17 +36,17 @@ export const ProductsGroupList: React.FC<Props> = ({ className, title, categoryI
     }, [intersection?.isIntersecting, title, categoryId])
 
   return (
-    <div id={title} className={cn('mb-5', className)} ref={intersectionRef}>
+    <div id={title} className={cn('mb-20', className)} ref={intersectionRef}>
         <Title text={title} size='lg' className='font-extrabold'/>
         <div className='mt-5 grid gap-[50px] grid-cols-[repeat(auto-fill,minmax(285px,1fr))]'>
             {items.map((item) => (
                 <ProductCard
                     key={item.id}
                     id={item.id}
-                    title={item.title}
+                    title={item.name}
                     price={item.items[0].price}
                     imageUrl={item.imageUrl}
-                    ingredients={item.ingredients}
+                    ingredients={item.ingredients.map((ingredient : Ingredient) => ingredient.name)}
                 />
             ))}
         </div>

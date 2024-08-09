@@ -15,15 +15,16 @@ interface PriceProps {
 interface Props {
     className?: string;
     prices: PriceProps,
-    updatePrices: (name: keyof PriceProps, value: number) => void,
     setPrices: Dispatch<SetStateAction<PriceProps>>,
 }
 
 
 
-export const PriceFilter: React.FC<Props> = ({ className, prices, updatePrices, setPrices }) => {
+export const PriceFilter: React.FC<Props> = ({ className, prices, setPrices }) => {
 
-
+  const updatePrices = (name: keyof PriceProps, value: number) => {
+    setPrices((prev) => ({ ...prev, [name]: value }));
+  }
 
   return (
     <div className={cn('py-6 border-y flex flex-col gap-4', className)}>
