@@ -1,6 +1,15 @@
-import { useQueryFilters } from './use-query-filters';
-import { useFilters } from './use-filters';
+import { useQueryFilters } from "./use-query-filters";
+import { useFilters } from "./use-filters";
 import { useCategories } from "./use-categories";
 import { useIngredients } from "./use-ingredients";
+import { useAvailablePizzaSizes } from "./use-available-pizza-sizes";
+import { usePizzaOptions } from "./use-pizza-options";
 
-export { useCategories, useIngredients, useFilters, useQueryFilters };
+export {
+  useCategories,
+  useIngredients,
+  useFilters,
+  useQueryFilters,
+  useAvailablePizzaSizes,
+  usePizzaOptions,
+};

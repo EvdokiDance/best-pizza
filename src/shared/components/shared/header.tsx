@@ -1,10 +1,11 @@
 import React from 'react';
-import { cn } from '@/lib/utils';
+
 import { Container, SearchInput } from '.';
 import Image from 'next/image';
 import { Button } from '..';
-import { Search, ShoppingCart, User } from 'lucide-react';
+import {  ShoppingCart, User } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/shared/lib';
 
 interface Props {
     className?: string,

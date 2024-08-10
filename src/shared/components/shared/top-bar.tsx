@@ -1,12 +1,12 @@
 'use client'
 
 import React from 'react';
-import { cn } from '@/lib/utils';
+
 import { Container } from '.';
 import { Categories } from './categories';
 import { SortPopup } from './sort-popup';
-import { useCategories } from '@/shared/lib/hooks/use-categories';
 import { Category } from '@prisma/client';
+import { cn } from '@/shared/lib';
 
 interface Props {
     className?: string;

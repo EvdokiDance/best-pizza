@@ -3,10 +3,10 @@
 import React from 'react';
 
 import { Dialog, DialogContent } from '../../ui/dialog';
-import { cn } from '@/lib/utils';
 import { ChoosePizzaForm, ChooseProductForm, Title } from '..';
 import { iProduct } from '@/types';
 import { useRouter } from 'next/navigation';
+import { cn } from '@/shared/lib';
 
 interface Props {
     className?: string;
@@ -17,7 +17,14 @@ export const ChooseProductModal: React.FC<Props> = ({ className, product }) => {
 
   const router = useRouter();
 
-  const content = product.items[0].pizzaType ? <ChoosePizzaForm product={product}/> : <ChooseProductForm product={product}/>
+  const content = product.items[0].pizzaType ? 
+  <ChoosePizzaForm 
+    name={product.name} 
+    imageUrl={product.imageUrl} 
+    items={product.items} 
+    ingredients={product.ingredients}/> 
+  : 
+  <ChooseProductForm product={product}/>
 
 
   return (

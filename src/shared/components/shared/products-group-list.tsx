@@ -2,11 +2,12 @@
 
 import React, { useEffect } from 'react';
 import { ProductCard, Title } from '.';
-import { cn } from '@/lib/utils';
+
 import { useIntersection } from 'react-use';
 import { useCategoryStore } from '@/store';
 import { Ingredient, Product } from '@prisma/client';
 import { iProduct } from '@/types';
+import { cn } from '@/shared/lib';
 
 interface Props {
     className?: string;

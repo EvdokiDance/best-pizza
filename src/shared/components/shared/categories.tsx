@@ -2,9 +2,10 @@
 
 
 import React from 'react';
-import { cn } from '@/lib/utils';
+
 import { useCategoryStore } from '@/store';
 import { Category } from '@prisma/client';
+import { cn } from '@/shared/lib';
 interface Props {
     className?: string; 
     categories: Category[];

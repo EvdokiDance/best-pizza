@@ -1,3 +1,4 @@
+'use client'
 import { useRouter } from "next/navigation";
 import qs from 'qs';
 import { useEffect } from "react";

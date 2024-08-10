@@ -1,8 +1,9 @@
 import React from 'react';
-import { cn } from '@/lib/utils';
+
 import { Product } from '@prisma/client';
-import { PizzaImage, Title } from '.';
+import { Title } from '.';
 import { Button } from '..';
+import { cn } from '@/shared/lib';
 
 interface Props {
     className?: string;

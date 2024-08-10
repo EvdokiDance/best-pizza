@@ -3,7 +3,8 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import { RangeSlider, Title } from '.';
 import { Input } from '..';
-import { cn } from '@/shared/lib/utils';
+import { cn } from '@/shared/lib';
+
 
 
 interface PriceProps {

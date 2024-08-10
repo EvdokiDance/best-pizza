@@ -2,7 +2,8 @@
 'use client'
 
 import React from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '@/shared/lib/utils';
+
 import { FilterCheckbox, FilterCheckboxProps } from './filter-checkbox';
 
 import { Title } from '.';

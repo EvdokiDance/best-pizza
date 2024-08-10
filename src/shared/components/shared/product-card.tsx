@@ -1,9 +1,10 @@
 import React from "react";
-import { cn } from "@/lib/utils";
+
 import { Title } from ".";
 import { Plus, Settings2 } from "lucide-react";
 import { Button } from "..";
 import Link from "next/link";
+import { cn } from "@/shared/lib";
 
 interface Props {
   id: number,

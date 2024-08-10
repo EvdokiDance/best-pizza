@@ -1,3 +1,4 @@
+'use client';
 import { useSet } from "react-use";
 import { useSearchParams } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from 'react'

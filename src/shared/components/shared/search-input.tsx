@@ -1,12 +1,13 @@
 'use client'
 
 import React from 'react';
-import { cn } from '@/lib/utils';
+
 import { useClickAway, useDebounce } from 'react-use';
 import { Search } from 'lucide-react';
 import { Api } from '@/shared/services/api-client';
 import Link from 'next/link';
 import { Product } from '@prisma/client';
+import { cn } from '@/shared/lib';
 interface Props {
     className?: string;
 }
