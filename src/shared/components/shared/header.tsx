@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { Container, SearchInput } from '.';
+import { CartButton, Container, SearchInput } from '.';
 import Image from 'next/image';
 import { Button } from '..';
 import {  ArrowRight, ShoppingCart, User } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/shared/lib';
+import { CartDrawer } from './cart-drawer';
 
 interface Props {
     className?: string,
@@ -32,7 +33,7 @@ export const Header: React.FC<Props> = ({ className }) => {
                     </Button>
                 </div>
                 <div>
-                    <Button className='group relative'>
+                    {/* <Button className='group relative'>
                         <b>520 ₽</b>
                         <span className='h-full w-[1px] bg-white/30 mx-3'/>
                         <div className='flex items-center gap-1  transition-all duration-300 group-hover:opacity-0'>
@@ -40,7 +41,8 @@ export const Header: React.FC<Props> = ({ className }) => {
                             <b>3</b>
                         </div>
                         <ArrowRight size={20} className='absolute  transition-all duration-300 -translate-x-2 group-hover:opacity-100 right-5 group-hover:right-3 opacity-0'/>
-                    </Button>
+                    </Button> */}
+                    <CartButton/>
                 </div>
            </div>
         </Container>
