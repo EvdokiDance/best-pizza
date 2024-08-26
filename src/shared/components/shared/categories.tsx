@@ -15,7 +15,7 @@ interface Props {
 
 export const Categories: React.FC<Props> = ({ className, categories }) => { 
 
- const activeId = useCategoryStore((state : any) => state.activeId);
+ const activeId = useCategoryStore((state) => state.activeId);
 
   return (
     <div className={cn('inline-flex items-center p-1 gap-1 bg-gray-50 rounded-2xl select-none', className)}>

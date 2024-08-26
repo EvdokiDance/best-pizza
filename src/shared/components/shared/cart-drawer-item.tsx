@@ -7,9 +7,13 @@ import { CartItemInfo } from "./cart-item-details/cart-item-info";
 import { Trash2 } from "lucide-react";
 interface Props extends CartItemProps {
   className?: string;
+  onClickUpdateQuantity: (type: 'plus' | 'minus') => void,
+  onClickRemove: () => void,
 }
 
 export const CartDrawerItem: React.FC<Props> = ({
+  onClickUpdateQuantity,
+  onClickRemove,
   className,
   imageUrl,
   name,
@@ -17,6 +21,9 @@ export const CartDrawerItem: React.FC<Props> = ({
   quantity = 1,
   details,
 }) => {
+
+
+
   return (
     <div className={cn("flex gap-6 bg-white p-5 ", className)}>
       <CartItemDetails.Image src={imageUrl} />
@@ -24,10 +31,10 @@ export const CartDrawerItem: React.FC<Props> = ({
             <CartItemDetails.Info name={name} details={details} />
             <hr className="text-gray-400 my-3" />
             <div className="flex items-center justify-between">
-                <CartItemDetails.CountButton onClick={(type) => console.log(type)} value={quantity} />
+                <CartItemDetails.CountButton onClick={onClickUpdateQuantity} value={quantity} />
                 <div className="flex items-center gap-3">
                     <CartItemDetails.Price value={price} />
-                    <Trash2 size={20} className="text-gray-400 hover:text-gray-600 cursor-pointer"/>
+                    <Trash2 onClick={onClickRemove} size={20} className="text-gray-400 hover:text-gray-600 cursor-pointer"/>
                 </div>
             </div>
         </div>

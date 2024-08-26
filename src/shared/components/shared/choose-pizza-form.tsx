@@ -14,6 +14,7 @@ import { IngredientItem } from "./ingredient-item";
 import { usePizzaOptions } from "@/shared/lib/hooks/use-pizza-options";
 import { useAvailablePizzaSizes } from "@/shared/lib/hooks/use-available-pizza-sizes";
 import { getPizzaDetails } from "@/shared/lib/utils/get-pizza-details";
+import { useCartStore } from "@/store/cart";
 
 interface Props {
   className?: string;
@@ -21,6 +22,8 @@ interface Props {
   ingredients: Ingredient[];
   name: string;
   imageUrl: string;
+  loading?: boolean;
+  onSubmit: (currentItemId: number, ingredients: number[]) => void;
 }
 
 export const ChoosePizzaForm: React.FC<Props> = ({
@@ -29,26 +32,35 @@ export const ChoosePizzaForm: React.FC<Props> = ({
   imageUrl,
   items,
   ingredients,
+  onSubmit,
+  loading,
 }) => {
 
-  const { selectedIngredients, size, type, setSize, setType, onAddIngredient } =
-    usePizzaOptions();
+  const { selectedIngredients, size, type, setSize, setType, onAddIngredient, currentItemId } = usePizzaOptions(items);
 
+  
   const { availablePizzaSizes } = useAvailablePizzaSizes({
     items,
     type,
     size,
     setSize,
   });
-
+  
   const { textDetails, totalPrice } = getPizzaDetails(
     type,
     size,
     items,
     ingredients,
     selectedIngredients,
-  );
+    );
 
+
+    const handleSubmit = () => {
+      if (currentItemId) {
+        onSubmit(currentItemId, Array.from(selectedIngredients).map((Number)));
+      }
+    }
+    
   return (
     <div className={cn(className, "flex flex-1")}>
       <div className="flex flex-1 items-center justify-center">
@@ -83,7 +95,7 @@ export const ChoosePizzaForm: React.FC<Props> = ({
             ))}
           </div>
         </div>
-        <Button className="mt-7 w-full">
+        <Button loading={loading} onClick={handleSubmit} className="mt-7 w-full">
           Добавить в корзину за {totalPrice}₽
         </Button>
       </div>

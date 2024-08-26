@@ -1,6 +1,7 @@
 
 import { getCartDetails } from '@/shared/lib/utils/get-cart-details';
 import { Api } from '@/shared/services/api-client';
+import { CreateCartItemValues } from '@/shared/services/cart-dto/cart-dto';
 import { create } from 'zustand';
 
 
@@ -21,11 +22,11 @@ interface CartState {
     loading: boolean;
     error: boolean;
     items: ICartItem[];
-    totalAmout: number;
+    totalAmount: number;
 
 
     fetchCartItems: () => Promise<void>;
-    addCartItem: (value: ICartItem) => Promise<void>;
+    addCartItem: (values: CreateCartItemValues) => Promise<void>;
     updateItemQuintity: (id: number, quantity: number) => Promise<void>;
     removeCartItem: (id: number) => Promise<void>;
     
@@ -35,7 +36,7 @@ export const useCartStore = create<CartState>((set, get) => ({
     loading: true,
     error: false,
     items: [],
-    totalAmout: 0,
+    totalAmount: 0,
 
     fetchCartItems: async () => {
         try {
@@ -49,7 +50,42 @@ export const useCartStore = create<CartState>((set, get) => ({
             set({loading: false});
         }
     },
-    addCartItem: async () => {},
-    updateItemQuintity: async () => {},
-    removeCartItem: async () => {},
+    addCartItem: async (values) => {
+        try {
+            set({ loading: true, error: false });
+            console.log(values);
+            
+            const data = await Api.cart.addCartItem(values);
+            set(getCartDetails(data));
+        } catch (error) {
+            console.log(error);
+            set({error: true});
+        } finally {
+            set({loading: false});
+        } 
+    },
+    updateItemQuintity: async (id, quantity) => {
+        try {
+            set({ loading: true, error: false });
+            const data = await Api.cart.updateCartItemQuantity(id, quantity);
+            set(getCartDetails(data));
+        } catch (error) {
+            console.log(error);
+            set({error: true});
+        } finally {
+            set({loading: false});
+        }
+    },
+    removeCartItem: async (id) => {
+        try {
+            set({ loading: true, error: false });
+            const data = await Api.cart.removeCartItem(id);
+            set(getCartDetails(data));
+        } catch (error) {
+            console.log(error);
+            set({error: true});
+        } finally {
+            set({loading: false});
+        }
+    },
 }));

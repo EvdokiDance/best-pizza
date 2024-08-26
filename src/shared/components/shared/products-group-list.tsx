@@ -27,7 +27,6 @@ export const ProductsGroupList: React.FC<Props> = ({ className, title, categoryI
         threshold: 0.4,
     })  
 
-    console.log(items)
 
 
     useEffect(() => {

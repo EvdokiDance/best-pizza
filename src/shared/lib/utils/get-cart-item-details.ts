@@ -1,7 +1,7 @@
-import { Ingredient } from '@prisma/client';
 import { PizzaSize, PizzaType, mapPizzaType } from '../../constants/group-variants';
+import { ICartItem } from '@/store/cart';
 
-export const getCartItemDetails = (pizzaSize: PizzaSize, pizzaType: PizzaType, ingredients: Ingredient[]) => {
+export const getCartItemDetails = (pizzaSize: PizzaSize, pizzaType: PizzaType, ingredients: ICartItem['ingredients']) => {
     
     let details = [];
 

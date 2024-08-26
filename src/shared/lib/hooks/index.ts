@@ -4,6 +4,7 @@ import { useCategories } from "./use-categories";
 import { useIngredients } from "./use-ingredients";
 import { useAvailablePizzaSizes } from "./use-available-pizza-sizes";
 import { usePizzaOptions } from "./use-pizza-options";
+import { useModal } from './use-modal';
 
 export {
   useCategories,
@@ -12,4 +13,5 @@ export {
   useQueryFilters,
   useAvailablePizzaSizes,
   usePizzaOptions,
+  useModal,
 };

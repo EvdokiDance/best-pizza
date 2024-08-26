@@ -13,7 +13,7 @@ interface Props {
 
 export const IngredientItem: React.FC<Props> = ({ className, imageUrl, name, price, active, onClick }) => {
   return (
-    <div onClick={onClick} className={cn('flex border border-transparent w-32 flex-col items-center text-center p-1 shadow-md rounded-2xl relative cursor-pointer bg-white', {
+    <div onClick={onClick} className={cn('flex border border-transparent p-1 w-32 flex-col items-center text-center shadow-md rounded-2xl relative cursor-pointer bg-white', {
         'border-primary': active}, className)}>
         {active && <CircleCheck className='absolute top-2 right-2 text-primary'/>}
         <img height={110} width={110} src={imageUrl} alt={name}/>

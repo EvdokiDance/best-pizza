@@ -24,7 +24,7 @@ export const ProductCard: React.FC<Props> = ({
   ingredients,
 }) => {
   return (
-    <Link href={`/product/${id}`}>
+    <Link scroll={false} href={`/product/${id}`}>
     <div
       className={cn("flex flex-col gap-4 w-[285px] group relative", className)}
     >
