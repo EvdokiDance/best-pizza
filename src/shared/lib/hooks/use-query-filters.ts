@@ -1,3 +1,5 @@
+import { pizzaSizes } from './../../constants/group-variants';
+
 'use client'
 import { useRouter } from "next/navigation";
 import qs from 'qs';

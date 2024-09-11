@@ -17,6 +17,17 @@ export {Sidebar} from './sidebar';
 export {ChoosePizzaForm} from './choose-pizza-form';
 export {ChooseProductForm} from './choose-product-form';
 export {CartButton} from './cart-button';
+export {WhiteBoard} from './white-board';
+export {CheckoutItemDetails} from './checkout-item-details';
+export {CheckoutItem} from './checkout-item';
+export {CheckoutSidebar} from './checkout-sidebar';
+export {FormInput} from './form/form-input';
+export {RequiredSymbol} from './required-symbol';
+export {ErrorText} from './error-text';
+export {ClearButton} from './clear-button';
+export {AddressInput} from './address-input';
 
-export * from './checkbox-filters-group'
-export * from './modal'
+export * from './checkout';
+export * from './form';
+export * from './checkbox-filters-group';
+export * from './modal';

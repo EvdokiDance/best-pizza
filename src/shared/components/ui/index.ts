@@ -4,4 +4,5 @@ export {Checkbox} from './checkbox';
 export {Skeleton} from './skeleton';
 export {Dialog} from './dialog';
 export {Slider} from './slider';
+export {Textarea} from './textarea';
 export * from './sheet';

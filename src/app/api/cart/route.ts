@@ -1,9 +1,10 @@
-import { CartItemValues } from "./../../../shared/services/cart-dto/cart-dto";
+import { CreateCartItemValues } from "./../../../shared/services/cart-dto/cart-dto";
 import { prisma } from "@/prisma/prisma-client";
 
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "crypto";
 import { findOrCreateCart, updateCartTotalAmount } from "@/shared/lib";
+import { Ingredient } from "@prisma/client";
 
 export async function GET(req: NextRequest) {
   try {
@@ -52,7 +53,7 @@ export async function POST(req: NextRequest) {
   try {
     let cartToken = req.cookies.get("cartToken")?.value;
 
-    const data = (await req.json()) as CartItemValues;
+    const data = (await req.json()) as CreateCartItemValues;
 
     if (!cartToken) {
       cartToken = crypto.randomUUID();
@@ -64,17 +65,22 @@ export async function POST(req: NextRequest) {
       where: {
         cartId: cart.id,
         productItemId: Number(data.productItemId),
-        ingredients: {
-          every: {
-            id: {
-              in: data.ingredients,
-            },
-          },
-        },
       },
+      include: {
+        ingredients: true,
+      }
     });
+
+  
+   const hasSameIngredients  = (ingredients: Ingredient[] = [], ingredientsIds: number[] = []) => {
+    return ingredientsIds.every((id) => ingredients.some((ingredient) => ingredient.id === id));
+   }
+
+
+   const equalIngredients = hasSameIngredients(cartItem?.ingredients, data.ingredients);
+  
     
-    if (cartItem) {
+    if (cartItem && equalIngredients) {
       await prisma.cartItem.update({
         where: {
           id: cartItem.id,
@@ -100,6 +106,7 @@ export async function POST(req: NextRequest) {
     
     const resp = NextResponse.json(updatedCart);
     resp.cookies.set("cartToken", cartToken);
+    
     return resp;
   } catch (error) {
     console.log("[CART_POST_SERVER_ERROR]:", error);

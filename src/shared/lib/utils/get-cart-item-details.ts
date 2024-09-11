@@ -1,7 +1,7 @@
 import { PizzaSize, PizzaType, mapPizzaType } from '../../constants/group-variants';
 import { ICartItem } from '@/store/cart';
 
-export const getCartItemDetails = (pizzaSize: PizzaSize, pizzaType: PizzaType, ingredients: ICartItem['ingredients']) => {
+export const getCartItemDetails = (ingredients: ICartItem['ingredients'], pizzaSize?: PizzaSize | null, pizzaType?: PizzaType | null) => {
     
     let details = [];
 

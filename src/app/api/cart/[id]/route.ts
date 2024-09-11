@@ -23,7 +23,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
 
 
   if (!cartItem) {
-    return NextResponse.json({error: 'Cart not found!'});
+    return NextResponse.json({error: 'CartItem not found!'});
   }
 
 
@@ -84,8 +84,4 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     console.log('[CART_DELETE_SERVER_ERROR]:', error);
     return NextResponse.json({message: 'Не удалось удалить позицию в корзине'}, {status: 500});
  }
-
-
-
-
 }

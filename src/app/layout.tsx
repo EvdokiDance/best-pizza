@@ -16,11 +16,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html  lang="en">
       <head>
-        <link data-rh='true' rel="icon" href="/pizza-logo.ico"/>
+        <link rel="icon" href="/pizza-logo.ico"/>
       </head>
-      <body className={nunito.className}>{children}
+      <body suppressHydrationWarning={true} className={nunito.className}>
+        {children}
         <Toaster />
       </body>
     </html>

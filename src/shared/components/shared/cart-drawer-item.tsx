@@ -18,6 +18,7 @@ export const CartDrawerItem: React.FC<Props> = ({
   imageUrl,
   name,
   price,
+  disabled,
   quantity = 1,
   details,
 }) => {
@@ -25,7 +26,7 @@ export const CartDrawerItem: React.FC<Props> = ({
 
 
   return (
-    <div className={cn("flex gap-6 bg-white p-5 ", className)}>
+    <div className={cn("flex gap-6 bg-white p-5 ", disabled && "opacity-50 cursor-not-allowed",className)}>
       <CartItemDetails.Image src={imageUrl} />
         <div className="flex-1">
             <CartItemDetails.Info name={name} details={details} />

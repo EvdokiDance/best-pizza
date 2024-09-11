@@ -1,8 +1,8 @@
+'use client'
 import React from "react";
 import { cn } from "@/shared/lib/utils";
 import { Ingredient, ProductItem } from "@prisma/client";
-import { GroupVariants, PizzaImage, Title } from ".";
-import { Button } from "..";
+import { Button, GroupVariants, PizzaImage, Title } from "..";
 
 import {
   PizzaSize,

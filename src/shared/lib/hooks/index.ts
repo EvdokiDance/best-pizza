@@ -1,3 +1,4 @@
+import { useCart } from './use-cart';
 import { useQueryFilters } from "./use-query-filters";
 import { useFilters } from "./use-filters";
 import { useCategories } from "./use-categories";
@@ -14,4 +15,5 @@ export {
   useAvailablePizzaSizes,
   usePizzaOptions,
   useModal,
+  useCart,
 };

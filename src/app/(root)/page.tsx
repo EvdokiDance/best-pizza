@@ -1,28 +1,21 @@
 
 import { prisma } from '@/prisma/prisma-client';
-import { Container, ProductCard, ProductsGroupList, Title } from '@/shared/components';
+import { Container, ProductsGroupList, Title } from '@/shared/components';
 import { Sidebar } from '@/shared/components/shared/sidebar';
 import { TopBar } from '@/shared/components/shared/top-bar';
+import { FilterSearchParams, findPizzas } from '@/shared/lib/utils/find-pizzas';
 import React from 'react';
 
 interface Props {
     className?: string;
+    searchParams: FilterSearchParams;
 }
 
- const Page: React.FC<Props> = async () => {
 
-  const categories = await prisma.category.findMany({
-    include: {
-      products: {
-        include: {
-          ingredients: true,
-          items: true,
-        }
-      }
-    }
-  });
+ const PageHome: React.FC<Props> = async ({searchParams}) => {
 
-
+ const categories = await findPizzas(searchParams);
+  
   return (
     <>
       <Container className='mt-5'>
@@ -33,7 +26,9 @@ interface Props {
         <Sidebar/>
           <div className='w-full'>
             {
-              categories.map(category => <ProductsGroupList key={category.id} title={category.name} categoryId={category.id} items={category.products}/>)
+              categories.map(category => {
+               return Boolean(category.products.length) ? <ProductsGroupList key={category.id} title={category.name} categoryId={category.id} items={category.products}/> : null
+              })
             }
         </div>
       </Container>
@@ -41,4 +36,4 @@ interface Props {
   );
 };
 
-export default Page;
+export default PageHome;
